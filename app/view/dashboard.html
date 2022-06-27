@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="http://localhost/Moat/assets/css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body onload="addList()">
+    <header>
+        <div class="content_area">
+            Welcome {{name_user}},
+
+            <a href="http://localhost/Moat/dashboard/logout">Logout</a>,
+            <a href="http://localhost/Moat/register">Register Page</a>,
+            <a href="http://localhost/Moat/dashboard/artists">Artist List</a>.
+        </div>
+        
+    </header>
+
+        <div class="content_area">
+            <h1>Insert Album</h1>
+            <form method="POST" action="http://localhost/Moat/dashboard/insertAlbum">
+                <div class="newAlbum">
+                    <input type="text" id="artist" name="artist" placeholder="Artist">
+                    <input type="text" id="album" name="album" placeholder="Album Name">
+                    <input type="number" id="year" name="year" placeholder="Year">
+                    <button class="btn2" id="insertAlbum" onclick="ifalert('artist')">Insert</button>
+                </div>
+            </form>
+        </div>
+        <h1>List</h1>
+        
+        <div class="AlbumList" id="AlbumList">
+        </div>
+
+        <script>
+            function ifalert(artist) {
+                var string = typeof(artist) == 'string' ? document.getElementById('artist').value : document.getElementById(artist.id).value;
+                var artists = '{{artists}}'.split('%');
+                if (!artists.includes(string)){
+                    alert("This artist is not on our list");
+                }
+            }
+
+            function addList() {
+                var albums = JSON.parse('{{albums}}'.replace(/&quot;/g, '"'));
+                var role = '{{role}}';
+                for (i in albums) {
+                    document.getElementById("AlbumList").innerHTML += '<form method="POST"> <input type="text" id="artist' + i + '" name="artist" placeholder="Artist" value="' +
+                    albums[i].artist + '"> <input type="text" id="album' + i + '" name="album" placeholder="Album Name" value="' +
+                    albums[i].album +'"> <input type="number" id="year' + i + '" name="year" placeholder="Year" value="' + albums[i].year +
+                    '"> <input type="hidden" name="cd" id="cd' + i + '" value="' + albums[i].cd +'"> <button class="btn2" id="update' + i + '"onclick="ifalert(' + "artist" + i +')" formaction="http://localhost/Moat/dashboard/updateAlbum">Update</button> <button class="btn2" id="deleteButton" onclick="ifalert(artist' + i +')" formaction="http://localhost/Moat/dashboard/deleteAlbum">Delete</button> </form></br>';
+                }
+                if (role!='1') {
+                    document.getElementById("deleteButton").disabled = true;
+                }
+            }
+
+        </script>
+</body>
+</html>
+

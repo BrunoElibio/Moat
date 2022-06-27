@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Artists</title>
+	<link rel="stylesheet" href="http://localhost/Moat/assets/css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body onload="addList({{artists}})">
+    <a href="http://localhost/Moat/dashboard/">Album List</a>.
+    <div class="content_area">
+        <h1>Artists</h1>
+    <div class="artists" id="artists">
+        <ul id="ulArtists">
+        </ul>
+    </div>
+    </div>
+    <script>
+        function addList(x) {
+            for(i in x) {
+                document.getElementById("ulArtists").innerHTML += '<li><a href="https://www.twitter.com/' + x[i][0].twitter + '">' + x[i][0].name + " Twitter: " + '</li>';
+            }
+        }
+    </script>
+</body>
+</html>
+
