@@ -49,10 +49,13 @@
                     document.getElementById("AlbumList").innerHTML += '<form method="POST"> <input type="text" id="artist' + i + '" name="artist" placeholder="Artist" value="' +
                     albums[i].artist + '"> <input type="text" id="album' + i + '" name="album" placeholder="Album Name" value="' +
                     albums[i].album +'"> <input type="number" id="year' + i + '" name="year" placeholder="Year" value="' + albums[i].year +
-                    '"> <input type="hidden" name="cd" id="cd' + i + '" value="' + albums[i].cd +'"> <button class="btn2" id="update' + i + '"onclick="ifalert(' + "artist" + i +')" formaction="http://localhost/Moat/dashboard/updateAlbum">Update</button> <button class="btn2" id="deleteButton" onclick="ifalert(artist' + i +')" formaction="http://localhost/Moat/dashboard/deleteAlbum">Delete</button> </form></br>';
+                    '"> <input type="hidden" name="cd" id="cd' + i + '" value="' + albums[i].cd +'"> <button class="btn2" id="update' + i + '"onclick="ifalert(' + "artist" + i +')" formaction="http://localhost/Moat/dashboard/updateAlbum">Update</button> <button class="btn2" id="deleteButton" name="deleteButton" formaction="http://localhost/Moat/dashboard/deleteAlbum">Delete</button> </form></br>';
                 }
                 if (role!='1') {
-                    document.getElementById("deleteButton").disabled = true;
+                    var elements = document.getElementsByName("deleteButton");
+                    for (i in elements) {
+                        elements[i].disabled = true;
+                    }
                 }
             }
 
